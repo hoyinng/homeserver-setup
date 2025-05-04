@@ -1,7 +1,7 @@
 #!/bin/bash
 #openvpn
 echo "Installing OpenVPN"
-sudo apt update
+sudo apt-get update
 sudo apt install openvpn
 #pia
 echo "Setting up PIA with OpenVPN"
@@ -72,6 +72,7 @@ echo
 # Create auth.txt with the credentials
 echo -e "$username\n$password" > auth.txt
 
+echo "executing sudo openvpn --config '$ovpn_file' --auth-user-pass auth.txt &"
 # Start OpenVPN with the selected configuration and auth.txt
 sudo openvpn --config "$ovpn_file" --auth-user-pass auth.txt &
 
@@ -140,7 +141,6 @@ sed -i 's/"plugins": \[/& "Label",/' "$CORE_CONF"
 
 echo "Deluge and the Label plugin have been installed and enabled."
 #Prowlarr
-PROWLARR_VERSION="v0.3.1.1230"  # Change this to the latest version if needed
 # Prompt user for architecture
 echo "Your system architecture is: $(dpkg --print-architecture)"
 echo "Please select your architecture:"
@@ -152,13 +152,13 @@ read -p "Enter the number corresponding to your architecture (1, 2, or 3): " ARC
 # Set the download link based on user input
 case $ARCH_OPTION in
     1)
-        DOWNLOAD_URL="https://github.com/Prowlarr/Prowlarr/releases/download/${PROWLARR_VERSION}/Prowlarr.${PROWLARR_VERSION}.linux.x64.tar.gz"
+        DOWNLOAD_URL='http://prowlarr.servarr.com/v1/update/master/updatefile?os=linux&runtime=netcore&arch=x64'
         ;;
     2)
-        DOWNLOAD_URL="https://github.com/Prowlarr/Prowlarr/releases/download/${PROWLARR_VERSION}/Prowlarr.${PROWLARR_VERSION}.linux.arm.tar.gz"
+        DOWNLOAD_URL='http://prowlarr.servarr.com/v1/update/master/updatefile?os=linux&runtime=netcore&arch=arm'
         ;;
     3)
-        DOWNLOAD_URL="https://github.com/Prowlarr/Prowlarr/releases/download/${PROWLARR_VERSION}/Prowlarr.${PROWLARR_VERSION}.linux.arm64.tar.gz"
+        DOWNLOAD_URL='http://prowlarr.servarr.com/v1/update/master/updatefile?os=linux&runtime=netcore&arch=arm64'
         ;;
     *)
         echo "Invalid option. Exiting."
@@ -267,13 +267,13 @@ read -p "Enter the number corresponding to your architecture (1, 2, or 3): " ARC
 # Set the download link based on user input
 case $ARCH_OPTION in
     1)
-        DOWNLOAD_URL="https://github.com/Radarr/Radarr/releases/download/${RADARR_VERSION}/Radarr.${RADARR_VERSION}.linux.x64.tar.gz"
+        DOWNLOAD_URL='http://radarr.servarr.com/v1/update/master/updatefile?os=linux&runtime=netcore&arch=x64'
         ;;
     2)
-        DOWNLOAD_URL="https://github.com/Radarr/Radarr/releases/download/${RADARR_VERSION}/Radarr.${RADARR_VERSION}.linux.arm.tar.gz"
+        DOWNLOAD_URL='http://radarr.servarr.com/v1/update/master/updatefile?os=linux&runtime=netcore&arch=arm'
         ;;
     3)
-        DOWNLOAD_URL="https://github.com/Radarr/Radarr/releases/download/${RADARR_VERSION}/Radarr.${RADARR_VERSION}.linux.arm64.tar.gz"
+        DOWNLOAD_URL='http://radarr.servarr.com/v1/update/master/updatefile?os=linux&runtime=netcore&arch=arm64'
         ;;
     *)
         echo "Invalid option. Exiting."
