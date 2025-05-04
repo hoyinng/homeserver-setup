@@ -62,7 +62,7 @@ echo "Available .ovpn files in the PIA directory:"
 ls *.ovpn
 
 # Prompt the user to select an .ovpn file
-read -p "Enter the name of the .ovpn file you want to use (without path): " ovpn_file
+read -p "Enter the name of the .ovpn file you want to use (without path) [Ie:ca_toronto.ovpn]: " ovpn_file
 
 # Prompt for username and password
 read -p "Enter your PIA username: " username
@@ -254,10 +254,9 @@ echo "$UNINSTALL_SCRIPT"
 wget -qO- https://raw.githubusercontent.com/Sonarr/Sonarr/develop/distribution/debian/install.sh | sudo bash
 
 #Radarr
-# Define Radarr version
-RADARR_VERSION="v3.2.0.5080"  # Change this to the latest version if needed
 
 # Prompt user for architecture
+echo "Your system architecture is: $(dpkg --print-architecture)"
 echo "Please select your architecture:"
 echo "1) AMD64 (use arch=x64)"
 echo "2) ARM (use arch=arm)"
@@ -360,3 +359,6 @@ sudo chmod +x "$UNINSTALL_SCRIPT"
 echo "Radarr has been installed and started. You can access it at http://localhost:7878"
 echo "To uninstall Radarr, you can run the following script:"
 echo "$UNINSTALL_SCRIPT"
+
+# Install JellyFin
+curl https://repo.jellyfin.org/install-debuntu.sh | sudo bash
