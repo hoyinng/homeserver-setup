@@ -1,5 +1,4 @@
 #!/bin/bash
-
 #openvpn
 echo "Installing OpenVPN"
 sudo apt update
@@ -55,13 +54,6 @@ wget "$link" -O openvpn.zip
 # Create a directory called PIA and unzip the downloaded file into it
 mkdir -p PIA
 unzip openvpn.zip -d PIA
-
-# List the .ovpn files in the PIA directory
-echo "Available .ovpn files in the PIA directory:"
-ls PIA/*.ovpn
-
-# Prompt the user to select an .ovpn file
-read -p "Enter the name of the .ovpn file you want to use (without path): " ovpn_file
 
 cd PIA || { echo "Failed to change directory to PIA. Exiting..."; exit 1; }
 
